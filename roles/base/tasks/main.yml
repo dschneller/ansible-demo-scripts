@@ -1,0 +1,28 @@
+---
+# Base Setup 
+
+- name: Install CenterDevice Root CA Certificates
+  sudo: true
+  copy: src=usr/local/share/ca-certificates/{{ item }} dest=/usr/local/share/ca-certificates/{{ item }}
+  with_items:
+    - centerdevice-intermediate-ca.crt
+    - centerdevice-root-ca.crt
+
+- name: Update root certificate database
+  sudo: true
+  command: update-ca-certificates
+
+
+- name: Install ntp daemon
+  sudo: true
+  apt: pkg=ntp state=present
+
+- name: Ensure ntp daemon autostart
+  sudo: true
+  service: name=ntp enabled=yes
+  
+- name: Setup ntp daemon config
+  sudo: true
+  template: src=etc/ntp.conf.j2 dest=/etc/ntp.conf
+  notify: Restart ntp daemon
+

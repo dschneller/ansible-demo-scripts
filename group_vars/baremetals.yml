@@ -1,0 +1,6 @@
+---
+# Variables for all baremetal hosts
+NTP_SERVERS:
+  - 192.168.192.153
+  - 192.168.192.151
+  - 192.168.192.152

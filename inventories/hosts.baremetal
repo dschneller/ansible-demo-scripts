@@ -1,0 +1,12 @@
+[controllers]
+control01.baremetal
+control02.baremetal
+
+[nodes]
+node01.baremetal
+node02.baremetal
+    
+[baremetals:children]
+controllers
+nodes
+
